@@ -1,13 +1,31 @@
-<TabView androidTabsPosition="bottom">
-  <GridLayout *tabItem="{ title: 'Home' }">
-    <page-router-outlet name="homeTab"></page-router-outlet>
-  </GridLayout>
 
-  <GridLayout *tabItem="{ title: 'Browse' }">
-    <page-router-outlet name="browseTab"></page-router-outlet>
-  </GridLayout>
-
-  <GridLayout *tabItem="{ title: 'Search' }">
-    <page-router-outlet name="searchTab"></page-router-outlet>
-  </GridLayout>
+<TabView class="tab" selectedIndex="0">
+  <StackLayout *tabItem="{title: 'Capture Image'}">
+    <ScrollView>
+      <StackLayout>
+        <AbsoluteLayout #imgWrapper>
+          <Image width="100%" id="img"></Image>
+          <Label class="date-time-label" id="dateTime" [text]="cuttentDate | date : 'medium'" left="80%" top="80%">
+          </Label>
+        </AbsoluteLayout>
+        <Button text="Take Picture" (tap)="onBtnTap($event, imgWrapper )"></Button>
+      </StackLayout>
+    </ScrollView>
+  </StackLayout>
+  <StackLayout *tabItem="{title: 'Image List'}">
+    <ListView [items]="imageList" >
+      <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+        <StackLayout>
+          <Image width="100%" src="{{item}}" width="100%"></Image>
+        </StackLayout>
+      </ng-template>
+    </ListView>
+    <!-- <ScrollView>
+      <StackLayout>
+        <ng-container *ngIf="imageList && imageList.length > 0">
+          <Image width="100%" *ngFor="let img of imageList" src="{{img}}" width="100%"></Image>
+        </ng-container>
+      </StackLayout>
+    </ScrollView> -->
+  </StackLayout>
 </TabView>
