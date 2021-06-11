@@ -13,19 +13,13 @@
     </ScrollView>
   </StackLayout>
   <StackLayout *tabItem="{title: 'Image List'}">
-    <ListView [items]="imageList" >
+    <ListView height="100%" [items]="imageList" >
       <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
         <StackLayout>
-          <Image width="100%" src="{{item}}" width="100%"></Image>
+          <Image src="{{item}}" width="100%"></Image>
         </StackLayout>
       </ng-template>
     </ListView>
-    <!-- <ScrollView>
-      <StackLayout>
-        <ng-container *ngIf="imageList && imageList.length > 0">
-          <Image width="100%" *ngFor="let img of imageList" src="{{img}}" width="100%"></Image>
-        </ng-container>
-      </StackLayout>
-    </ScrollView> -->
+   
   </StackLayout>
 </TabView>
