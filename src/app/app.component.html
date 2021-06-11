@@ -14,7 +14,7 @@
   </StackLayout>
   <StackLayout *tabItem="{title: 'Image List'}">
     <ListView height="100%" [items]="imageList" >
-      <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+      <ng-template let-item="item" let-i="index" >
         <StackLayout>
           <Image src="{{item}}" width="100%"></Image>
         </StackLayout>
