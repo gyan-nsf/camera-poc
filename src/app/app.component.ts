@@ -34,23 +34,25 @@ export class AppComponent implements OnInit {
             height: 300,
             keepAspectRatio: false,
             saveToGallery: false
+          }).finally(() => {
+            console.log('finally');
           });
           const imgTag = imgWrapper.getViewById('img') as Image;
           imgTag.src = image.android;
           setTimeout(async () => {
             const screenshot = this.takeScreenShot(imgWrapper);
-            // screenShotImg.imageSource = screenshot;
-            const screenShotFolder = knownFolders.currentApp().getFolder('screenshots');
-
-            const saveToPath = path.join(screenShotFolder.path, `${new Date().toTimeString()}-screenshot.jpeg`)
-            const saved = screenshot.saveToFile(saveToPath, 'jpeg');
-            this.imageList = await this.getAllImages();
+            if(screenshot) {
+              const screenShotFolder = knownFolders.currentApp().getFolder('screenshots');
+              const saveToPath = path.join(screenShotFolder.path, `${new Date().toTimeString()}-screenshot.jpeg`)
+              const saved = screenshot.saveToFile(saveToPath, 'jpeg');
+              this.imageList = await this.getAllImages();
+            }
           }, 1000);
 
 
         },
         err => {
-          alert('Permission denied');
+          alert('Camera permission denied');
         }
       )
     } else {
@@ -76,6 +78,8 @@ export class AppComponent implements OnInit {
       let imgFromCurrentContext = UIGraphicsGetImageFromCurrentImageContext();
       UIGraphicsEndImageContext();
         return ImageSource.fromDataSync(imgFromCurrentContext);
+    } else {
+      return null;
     }
   }
 
